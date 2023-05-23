@@ -1,28 +1,23 @@
-// DummyLibraryUsage.cpp: определяет точку входа для консольного приложения.
+// UnmanagedConsole.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
 
 #include "stdafx.h"
 
 struct DummyStruct
 {
-    short a;
+	short a;
 	DWORD64 b;
-    byte c;
+	byte c;
 	double d;
 };
 
-typedef LPTSTR (__stdcall *HelloFunc)(LPTSTR name);
-typedef int (__stdcall *AddFunc)(int values[], int count);
-typedef DummyStruct (__stdcall *StructFunc)(void);
-typedef void (__stdcall *StructRefFunc)(DummyStruct& dummyStruct);
-typedef void (__stdcall *StructPtrFunc)(DummyStruct* dummyStruct);
+typedef LPTSTR(__stdcall* HelloFunc)(LPTSTR name);
+typedef int(__stdcall* AddFunc)(int values[], int count);
+typedef DummyStruct(__stdcall* StructFunc)(void);
+typedef void(__stdcall* StructRefFunc)(DummyStruct& dummyStruct);
+typedef void(__stdcall* StructPtrFunc)(DummyStruct* dummyStruct);
 
-void __stdcall MyCallback(LPTSTR name)
-{
-	wprintf(L"Hello from unmanaged code, %s!\n", name);
-}
-
-int _tmain(int argc, _TCHAR* argv[])
+int main()
 {
 	HMODULE hDll = LoadLibrary(L"DummyLibrary.dll");
 	if (!hDll)
@@ -36,7 +31,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	AddFunc addFunc = (AddFunc)GetProcAddress(hDll, "Add");
 	if (!addFunc)
 		return GetLastError();
-	int values[] = {1, 2, 3, 4, 5 };
+	int values[] = { 1, 2, 3, 4, 5 };
 	wprintf(L"Sum of integers from 1 to 5 is: %d\n", addFunc(values, sizeof(values) / sizeof(int)));
 
 	StructFunc structFunc = (StructFunc)GetProcAddress(hDll, "TestStruct");
@@ -59,3 +54,14 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	return 0;
 }
+
+// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
+// Debug program: F5 or Debug > Start Debugging menu
+
+// Tips for Getting Started: 
+//   1. Use the Solution Explorer window to add/manage files
+//   2. Use the Team Explorer window to connect to source control
+//   3. Use the Output window to see build output and other messages
+//   4. Use the Error List window to view errors
+//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
+//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
