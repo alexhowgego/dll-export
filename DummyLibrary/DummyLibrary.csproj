@@ -3,7 +3,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>DummyLibrary</RootNamespace>
     <AssemblyName>DummyLibrary</AssemblyName>
-    <TargetFramework>net7.0-windows</TargetFramework>
+    <TargetFrameworks>net7.0-windows;net48</TargetFrameworks>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\DllExporter\DllExporter.csproj">
@@ -19,9 +19,11 @@
   </Target>
   -->
   <PropertyGroup>
-    <PostBuildEvent>
+    <PostBuildEvent Condition="$(TargetFramework) == 'net7.0-windows'">
       DllExporter.exe $(AssemblyName).dll
-      move $(AssemblyName).Exports.dll $(AssemblyName).dll
-      copy $(AssemblyName).dll "$(SolutionDir)\Debug"</PostBuildEvent>
+      copy $(AssemblyName).Exports.dll "$(SolutionDir)\Debug"
+      move "$(SolutionDir)\Debug\$(AssemblyName).Exports.dll" "$(SolutionDir)\Debug\$(AssemblyName).dll"
+    </PostBuildEvent>
+    <PlatformTarget>x64</PlatformTarget>
   </PropertyGroup>
 </Project>
