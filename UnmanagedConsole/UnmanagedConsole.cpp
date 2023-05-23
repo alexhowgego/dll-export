@@ -1,7 +1,9 @@
 // UnmanagedConsole.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
 
-#include "stdafx.h"
+#include <stdio.h>
+#include <tchar.h>
+#include <windows.h>
 
 struct DummyStruct
 {
