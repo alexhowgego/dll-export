@@ -70,13 +70,8 @@ namespace DllExporter
             const string registryValue = "CurrentInstallFolder";
             var exception = new Exception("Cannot locate ildasm.exe.");            
 
-            var key = Registry.LocalMachine.OpenSubKey(registryPath) ?? Registry.CurrentUser.OpenSubKey(registryPath);
-            if (key == null)
-                throw exception;
-
-            var path = (string)key.GetValue(registryValue);
-            if (path == null)
-                throw exception;
+            var key = (Registry.LocalMachine.OpenSubKey(registryPath) ?? Registry.CurrentUser.OpenSubKey(registryPath)) ?? throw exception;
+            var path = (string)key.GetValue(registryValue) ?? throw exception;
 
             path += @"Bin\ildasm.exe";
             if (!File.Exists(path))

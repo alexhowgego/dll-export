@@ -21,11 +21,6 @@ namespace DummyLibrary
         [DllExport]
         public static void DummyMethod() { }
 
-        static void DummyMethod2() { }
-
-        [DllExport]
-        void DummyMethod3() { }
-
         [DllExport(EntryPoint = "SayHello")]
         [return:MarshalAs(UnmanagedType.LPTStr)]
         public static string Hello([MarshalAs(UnmanagedType.LPTStr)]string name)

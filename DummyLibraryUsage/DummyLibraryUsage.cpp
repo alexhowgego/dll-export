@@ -16,9 +16,6 @@ typedef int (__stdcall *AddFunc)(int values[], int count);
 typedef DummyStruct (__stdcall *StructFunc)(void);
 typedef void (__stdcall *StructRefFunc)(DummyStruct& dummyStruct);
 typedef void (__stdcall *StructPtrFunc)(DummyStruct* dummyStruct);
-typedef void (__stdcall *Callback)(LPTSTR name);
-typedef void (__stdcall *CallbackFunc)(Callback callback);
-typedef void (__stdcall *RainbowFunc)(void);
 
 void __stdcall MyCallback(LPTSTR name)
 {
@@ -59,16 +56,6 @@ int _tmain(int argc, _TCHAR* argv[])
 		return GetLastError();
 	structPtrFunc(&dummyStruct);
 	wprintf(L"Yet another struct fields are: %d, %llu, %hhu, %g\n", dummyStruct.a, dummyStruct.b, dummyStruct.c, dummyStruct.d);
-
-	//CallbackFunc callbackFunc = (CallbackFunc)GetProcAddress(hDll, "DoCallback");
-	//if (!callbackFunc)
-	//	return GetLastError();
-	//callbackFunc(&MyCallback);
-
-	//RainbowFunc rainbowFunc = (RainbowFunc)GetProcAddress(hDll, "Rainbow");
-	//if (!rainbowFunc)
-	//	return GetLastError();
-	//rainbowFunc();
 
 	return 0;
 }
