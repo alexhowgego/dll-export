@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Runtime.InteropServices;
 using DllExporter;
+using Newtonsoft.Json;
 
 namespace DummyLibrary
 {
@@ -18,6 +19,11 @@ namespace DummyLibrary
 
     public class DummyClass
     {
+        public static string CreateJSON(string propertyValue) => JsonConvert.SerializeObject(new
+        {
+            MyProperty = propertyValue
+        }).ToString();
+
         [DllExport]
         public static void DummyMethod() { }
 

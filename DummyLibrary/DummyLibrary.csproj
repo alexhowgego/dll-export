@@ -6,6 +6,9 @@
     <TargetFrameworks>net7.0-windows;net48</TargetFrameworks>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\DllExporter\DllExporter.csproj">
       <Project>{91C39DB0-92A3-4C7F-A78C-48A4B9DA93C9}</Project>
       <Name>DllExporter</Name>
